@@ -27,6 +27,7 @@ Route::group(
         Route::get('cities', 'MainController@cities');
         Route::post('register', 'AuthController@register');
         Route::post('login', 'AuthController@login');
+        Route::post('forgot', 'AuthController@forgot');
 
         Route::group(
             ['middleware' => 'auth:api'], function () {

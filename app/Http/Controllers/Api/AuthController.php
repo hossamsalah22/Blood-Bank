@@ -67,4 +67,31 @@ class AuthController extends Controller
             return responseJson(0, 'There is no account associated with this number');
         }        
     }
+
+    public function forgot( Request $request) 
+    {
+        $validator = Validator()->make($request->all(), [
+            'phone' => 'required',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return responseJson(0, $validator->errors()->first(), $validator->errors());
+        }
+
+        $client = Client::where('phone', $request->phone)->first();
+        if ($client )
+        {
+            $code = rand(0001, 9999);
+            $update = $client->update(['pin_code' => $code]);
+            if ($update) {
+                return responseJson(1, 'Message Sent', $code);
+            } else {
+                return responseJson(0, 'error, please try again');
+            }
+            
+        } else {
+            return responseJson(0, 'There is no account associated with this number');
+        }        
+    }
 }
