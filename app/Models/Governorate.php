@@ -16,4 +16,9 @@ class Governorate extends Model
         return $this->hasMany('App\Models\City');
     }
 
+    public function clients()
+    {
+        return $this->hasMany('App\Models\Client');
+    }
+
 }

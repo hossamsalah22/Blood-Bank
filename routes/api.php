@@ -27,12 +27,19 @@ Route::group(
         Route::get('cities', 'MainController@cities');
         Route::post('register', 'AuthController@register');
         Route::post('login', 'AuthController@login');
-        Route::post('forgot', 'AuthController@forgot');
+        Route::post('reset-password', 'AuthController@reset');
+        Route::post('new-password', 'AuthController@password');
 
         Route::group(
             ['middleware' => 'auth:api'], function () {
                 Route::get('categories', 'MainController@categories');
                 Route::get('posts', 'MainController@posts');
+                Route::post('profile', 'AuthController@profile');
+                Route::post('create-donation-request', 'MainController@createDonationRequest');
+                Route::get('donation-request', 'MainController@donation_request');
+                Route::get('settings', 'MainController@settings');
+                Route::post('favourites', 'MainController@postFavourite');
+                Route::post('myFavourites', 'MainController@myFavourites');
             }
         );
     }

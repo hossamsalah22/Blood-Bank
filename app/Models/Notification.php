@@ -16,4 +16,9 @@ class Notification extends Model
         return $this->belongsTo('App\Models\DonationRequest');
     }
 
+    public function clients()
+    {
+        return $this->hasMany('App\Models\Client');
+    }
+
 }

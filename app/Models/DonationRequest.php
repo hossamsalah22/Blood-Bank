@@ -9,7 +9,7 @@ class DonationRequest extends Model
 
     protected $table = 'donation_requests';
     public $timestamps = true;
-    protected $fillable = array('name', 'phone', 'blood_type_id', 'hospital_name', 'patient_age', 'blood_bags_num', 'hospital_address', 'client_id', 'notes', 'longitude', 'latitude');
+    protected $fillable = array('name', 'phone', 'blood_type_id', 'hospital_name', 'patient_age', 'blood_bags_num', 'hospital_address', 'client_id', 'notes', 'longitude', 'latitude', 'city_id');
 
     public function city()
     {

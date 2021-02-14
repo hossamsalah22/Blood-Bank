@@ -11,12 +11,12 @@ class BloodTypeClient extends Model
     public $timestamps = true;
     protected $fillable = array('blood_type_id', 'client_id');
 
-    public function blood_types()
+    public function clients()
     {
-        return $this->hasMany('App\Models\Client');
+        return $this->belongsToMany('App\Models\Client');
     }
 
-    public function clients()
+    public function blood_types()
     {
         return $this->hasMany('App\Models\BloodType');
     }
