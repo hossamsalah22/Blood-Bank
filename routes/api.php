@@ -23,23 +23,23 @@ Route::middleware('auth:api')->get(
 
 Route::group(
     ['prefix' => 'v1' , 'namespace' => 'App\Http\Controllers\Api'], function () {
-        Route::get('governorates', 'MainController@governorates');
-        Route::get('cities', 'MainController@cities');
-        Route::post('register', 'AuthController@register');
-        Route::post('login', 'AuthController@login');
-        Route::post('reset-password', 'AuthController@reset');
-        Route::post('new-password', 'AuthController@password');
+        Route::get('governorates', 'MainCycle\GovernoratesController@index');
+        Route::get('cities', 'MainCycle\CitiesController@index');
+        Route::post('register', 'AuthCycle\RegisterController@index');
+        Route::post('login', 'AuthCycle\LoginController@index');
+        Route::post('resetPassword', 'AuthCycle\ResetPasswordController@index');
+        Route::post('newPassword', 'AuthCycle\NewPasswordController@index');
 
         Route::group(
             ['middleware' => 'auth:api'], function () {
-                Route::get('categories', 'MainController@categories');
-                Route::get('posts', 'MainController@posts');
-                Route::post('profile', 'AuthController@profile');
-                Route::post('create-donation-request', 'MainController@createDonationRequest');
-                Route::get('donation-request', 'MainController@donation_request');
-                Route::get('settings', 'MainController@settings');
-                Route::post('favourites', 'MainController@postFavourite');
-                Route::post('myFavourites', 'MainController@myFavourites');
+                Route::get('categories', 'MainCycle\CategoriesController@index');
+                Route::get('posts', 'MainCycle\PostsController@index');
+                Route::post('profile', 'AuthCycle\ProfileController@index');
+                Route::post('create-request', 'MainCycle\DonationsController@createRequest');
+                Route::get('donations', 'MainCycle\DonationsController@index');
+                Route::get('settings', 'Admin\SettingsController@index');
+                Route::post('post', 'MainCycle\PostsController@favouration');
+                Route::post('favourites', 'MainCycle\PostsController@favourites');
             }
         );
     }
