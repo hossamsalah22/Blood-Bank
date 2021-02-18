@@ -35,11 +35,14 @@ Route::group(
                 Route::get('categories', 'MainCycle\CategoriesController@index');
                 Route::get('posts', 'MainCycle\PostsController@index');
                 Route::post('profile', 'AuthCycle\ProfileController@index');
-                Route::post('create-request', 'MainCycle\DonationsController@createRequest');
+                Route::post('donations/create', 'MainCycle\DonationsController@createRequest');
                 Route::get('donations', 'MainCycle\DonationsController@index');
                 Route::get('settings', 'Admin\SettingsController@index');
-                Route::post('post', 'MainCycle\PostsController@favouration');
-                Route::post('favourites', 'MainCycle\PostsController@favourites');
+                Route::post('favouration', 'MainCycle\PostsController@favouration');
+                Route::get('favourites', 'MainCycle\PostsController@favourites');
+                Route::post('new-device', 'AuthCycle\NotificationsController@registerToken');
+                Route::post('remove-device', 'AuthCycle\NotificationsController@removeToken');
+                Route::post('notificationSettings', 'AuthCycle\NotificationsController@settings');
             }
         );
     }

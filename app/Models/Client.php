@@ -39,7 +39,7 @@ class Client extends Model
 
     public function notifications()
     {
-        return $this->hasMany('App\Models\Notification');
+        return $this->belongsToMany('App\Models\Notification');
     }
 
     public function posts()
@@ -47,9 +47,17 @@ class Client extends Model
         return $this->belongsToMany('App\Models\Post');
     }
 
+    public function tokens()
+    {
+        return $this->hasMany('App\Models\Token');
+    }
+
+
     protected $hidden = [
         'password',
         'api_token',
     ];
+
+    
 
 }

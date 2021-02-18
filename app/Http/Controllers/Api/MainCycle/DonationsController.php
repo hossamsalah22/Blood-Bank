@@ -36,9 +36,6 @@ class DonationsController extends Controller
             'city_id' => 'required|exists:cities,id',
             'blood_bags_num' => 'required',
             'hospital_address' => 'required',
-            'longitude' => 'required',
-            'latitude' => 'required',
-            'note' => 'string',
         ];
 
         $validator = Validator()->make($request->all(), $data);
@@ -46,8 +43,30 @@ class DonationsController extends Controller
             return responseJson(0, $validator->errors()->first());
         }
 
-        $donateRequest = $request->user()->donation_requests()->create($request->all());
+        $donateRequest = $request->user()->donation_requests()
+            ->create($request->all());
 
+        $clientsIDs = $donateRequest->city->governorate
+            ->clients()->whereHas(
+                'blood_types', function ($query) use ($request) {
+                    $query->where('blood_type_id', $request->blood_type_id);
+                }
+            )->pluck('clients.id')->toArray();
+
+        // Create Notifications on DB
+        if (count($clientsIDs)) {
+            $dNotification = $donateRequest->notifications()->create(
+                [
+                    'title' => 'Donation Request NearBy',
+                    'content' => 'Need Donator for Blood Type ' . $donateRequest->blood_type->name ,
+                    'donation_request_id' => $donateRequest->id,
+                ]
+            );
+            
+            // Attach Clients to the notificatrion
+            $dNotification->clients()->attach($clientsIDs);
+        }
+        
         return responseJson(1, 'Request Added Successfully', $donateRequest->load('city'));
     }
 }

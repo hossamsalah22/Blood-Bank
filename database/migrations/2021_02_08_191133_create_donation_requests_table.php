@@ -19,9 +19,9 @@ class CreateDonationRequestsTable extends Migration {
 			$table->integer('blood_bags_num');
 			$table->string('hospital_address');
 			$table->integer('client_id')->unsigned();
-			$table->text('notes');
-			$table->decimal('longitude', 10,8);
-			$table->decimal('latitude', 10,8);
+			$table->text('notes')->nullable();
+			$table->decimal('longitude', 10,8)->nullable();
+			$table->decimal('latitude', 10,8)->nullable();
 		});
 	}
 
