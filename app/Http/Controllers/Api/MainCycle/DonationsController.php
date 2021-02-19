@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\MainCycle;
 
 use App\Http\Controllers\Controller;
 use App\Models\DonationRequest;
+use App\Models\Token;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 
@@ -66,8 +67,22 @@ class DonationsController extends Controller
             
             // Attach Clients to the notificatrion
             $dNotification->clients()->attach($clientsIDs);
+
+            $tokens = Token::whereIn('client_id', $clientsIDs)
+                ->where('token', '!=', null)
+                ->pluck('token')->toArray();
+            
+            if (count($tokens)) {
+                $title = $dNotification->title;
+                $body = $dNotification->content;
+                $data = [
+                    'donation_request_id' => $donateRequest->id,
+                ];
+                $send = notifyByFirebase($title, $body, $tokens, $data);
+                info('result: '. $send);
+            }
         }
         
-        return responseJson(1, 'Request Added Successfully', $donateRequest->load('city'));
+        return responseJson(1, 'Request Added Successfully', $data);
     }
 }
