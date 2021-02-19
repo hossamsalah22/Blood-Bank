@@ -16,8 +16,8 @@ class NotificationsController extends Controller
     {
         $validator = Validator()->make(
             $request->all(), [
-                'governorate_id' => 'array|exists:governorates,id',
-                'blood_type' => 'array|exists:blood_types,name'
+                'governorate_id' => 'exists:governorates,id',
+                'blood_type_id' => 'exists:blood_types,id'
             ]
         );
 
@@ -30,9 +30,8 @@ class NotificationsController extends Controller
             $request->user()->governorates()->toggle($request->governorate_id);
         }
 
-        if ($request->has('blood_type')) {
-            $bloodtype = BloodType::where('name', $request->blood_type)->first();
-            $request->user()->blood_types()->toggle($bloodtype->id);
+        if ($request->has('blood_type_id')) {
+            $request->user()->blood_types()->toggle($request->blood_type_id);
         }
 
         return responseJson(1, 'Data Updated Successfully');

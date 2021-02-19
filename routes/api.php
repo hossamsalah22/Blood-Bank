@@ -27,8 +27,8 @@ Route::group(
         Route::get('cities', 'MainCycle\CitiesController@index');
         Route::post('register', 'AuthCycle\RegisterController@index');
         Route::post('login', 'AuthCycle\LoginController@index');
-        Route::post('resetPassword', 'AuthCycle\ResetPasswordController@index');
-        Route::post('newPassword', 'AuthCycle\NewPasswordController@index');
+        Route::post('reset-password', 'AuthCycle\ResetPasswordController@index');
+        Route::post('new-password', 'AuthCycle\NewPasswordController@index');
 
         Route::group(
             ['middleware' => 'auth:api'], function () {
@@ -42,7 +42,7 @@ Route::group(
                 Route::get('favourites', 'MainCycle\PostsController@favourites');
                 Route::post('new-device', 'AuthCycle\NotificationsController@registerToken');
                 Route::post('remove-device', 'AuthCycle\NotificationsController@removeToken');
-                Route::post('notificationSettings', 'AuthCycle\NotificationsController@settings');
+                Route::post('notification-settings', 'AuthCycle\NotificationsController@settings');
             }
         );
     }

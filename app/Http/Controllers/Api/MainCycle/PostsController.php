@@ -18,6 +18,9 @@ class PostsController extends Controller
                 if ($request->has('category_id')) {
                     $query->where('category_id', $request->category_id);
                 }
+                if ($request->has('id')) {
+                    $query->where('id', $request->id);
+                }
             }
         )->paginate(10);
 

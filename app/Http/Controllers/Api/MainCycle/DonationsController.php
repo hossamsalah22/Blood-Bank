@@ -16,8 +16,9 @@ class DonationsController extends Controller
             {
                 if ($request->has('city_id')) {
                     $query->where('city_id', $request->city_id);
-                } elseif ($request->has('blood_type_id')) {
-                    $query->where('blood_type_id', $request->blood_type_id);
+                    if ($request->has('blood_type_id')) {
+                        $query->where('blood_type_id', $request->blood_type_id);
+                    }
                 }
             }
         )->get();

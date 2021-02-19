@@ -35,10 +35,9 @@ class ProfileController extends Controller
             $currntUser->gevernorates->attach($request->governorate_id);
         }
 
-        if ($request->has('blood_type')) {
-            $bloodtype = BloodType::where('name', $request->blood_type)->first();
-            $currntUser->blood_types->detach($bloodtype->id);
-            $currntUser->blood_types->attach($bloodtype->id);
+        if ($request->has('blood_type_id')) {
+            $currntUser->blood_types->detach($request->blood_type_id);
+            $currntUser->blood_types->attach($request->blood_type_id);
         }
         return responseJson(
             1, 'data updated successfully', [
