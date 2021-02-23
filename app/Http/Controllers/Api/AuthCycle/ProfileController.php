@@ -15,8 +15,10 @@ class ProfileController extends Controller
         $validator = Validator()->make(
             $request->all(), [
                 'password' => 'confirmed',
-                'email' => Rule::unique('clients', 'email')->ignore($$request->user()->id),
-                'phone' => Rule::unique('clients', 'phone')->ignore($$request->user()->id),
+                'email' => Rule::unique('clients', 'email')
+                    ->ignore($request->user()->id),
+                'phone' => Rule::unique('clients', 'phone')
+                    ->ignore($request->user()->id),
             ]
         );
         if ($validator->fails()) {
@@ -25,14 +27,14 @@ class ProfileController extends Controller
 
         $currntUser = $request->user();
         $currntUser->update($request->all());
-        if ($currntUser->has('password')) {
+        if ($request->has('password')) {
             $currntUser->password = bcrypt($request->password);
         }
         $currntUser->save();
 
-        if ($request->has('gevernorate_id')) {
-            $currntUser->gevernorates->detach($request->governorate_id);
-            $currntUser->gevernorates->attach($request->governorate_id);
+        if ($request->has('governorate_id')) {
+            $currntUser->governorates->detach($request->governorate_id);
+            $currntUser->governorates->attach($request->governorate_id);
         }
 
         if ($request->has('blood_type_id')) {

@@ -16,14 +16,17 @@ class PostsController extends Controller
             function ($query) use ($request)
             {
                 if ($request->has('category_id')) {
-                    $query->where('category_id', $request->category_id);
-                }
-                if ($request->has('id')) {
+                    if ($request->has('id')) {
+                        $query->where('category_id', $request->category_id)
+                            ->where('id', $request->id);
+                    } else {
+                        $query->where('category_id', $request->category_id);
+                    }
+                } elseif ($request->has('id')) {
                     $query->where('id', $request->id);
                 }
             }
         )->paginate(10);
-
         return responseJson(1, 'Success', $posts);
     }
 

@@ -16,10 +16,14 @@ class DonationsController extends Controller
             function ($query) use ($request)
             {
                 if ($request->has('city_id')) {
-                    $query->where('city_id', $request->city_id);
                     if ($request->has('blood_type_id')) {
-                        $query->where('blood_type_id', $request->blood_type_id);
+                        $query->where('blood_type_id', $request->blood_type_id)
+                            ->where('city_id', $request->city_id);
+                    } else {
+                        $query->where('city_id', $request->city_id);
                     }
+                } elseif ($request->has('blood_type_id')) {
+                    $query->where('blood_type_id', $request->blood_type_id);
                 }
             }
         )->get();
@@ -81,8 +85,7 @@ class DonationsController extends Controller
                 $send = notifyByFirebase($title, $body, $tokens, $data);
                 info('result: '. $send);
             }
-        }
-        
-        return responseJson(1, 'Request Added Successfully', $data);
+        }  
+        return responseJson(1, 'Request Added Successfully', $donateRequest);
     }
 }
