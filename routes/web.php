@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GovernorateController;
 use App\Http\Controllers\CitiesController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,14 +16,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get(
+    '/', function () { return view('welcome');
+    }
+);
 
-Route::resource('governorate', 'App\Http\Controllers\GovernorateController');
-Route::resource('city', 'App\Http\Controllers\CitiesController');
-Route::resource('category', 'App\Http\Controllers\CategoriesController');
-Route::resource('post', 'App\Http\Controllers\PostsController');
+Route::group(
+    ['namespace' => 'App\Http\Controllers', 'middleware' => 'auth:web'], function () {
+        Route::resource('governorate', 'GovernorateController');
+        Route::resource('city', 'CitiesController');
+        Route::resource('category', 'CategoriesController');
+        Route::resource('post', 'PostsController');
+        Route::resource('client', 'ClientsController');
+    }
+);
+
 
 Auth::routes();
 

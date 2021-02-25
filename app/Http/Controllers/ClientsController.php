@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Post;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
-class PostsController extends Controller
+class ClientsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $record = Post::all();
-        return view('posts.index', compact('record'));
+        $record = Client::all();
+        return view('clients.index', compact('record'));
     }
 
     /**
@@ -26,10 +25,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create', [
-            'category' => Category::all(),
-            ]
-        );
+        //
     }
 
     /**
@@ -40,16 +36,7 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'title' => 'required|min:6',
-            'content' => 'required',
-            'image' => 'required',
-            'category_id' => 'required|exists:categories,id'
-        ];
-        $this->validate($request, $rules);
-        $record = Post::create($request->all());
-        flash('Success')->success();
-        return redirect(route('post.index'));
+        //
     }
 
     /**
@@ -60,8 +47,8 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $model = Post::findOrFail($id);
-        return view('posts.show', compact('model'));
+        $record = Client::findOrFail($id);
+        return view('clients.show', compact('record'));
     }
 
     /**
@@ -72,8 +59,7 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $model = Post::findOrFail($id);
-        return view('posts.edit', compact('model'));
+        //
     }
 
     /**
@@ -85,10 +71,7 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $record = Post::findOrFail($id);
-        $record->update($request->all());
-        flash('Updated')->success();
-        return redirect(route('post.index'));
+        //
     }
 
     /**
@@ -99,9 +82,9 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        $record = Post::findOrFail($id);
+        $record = Client::findOrFail($id);
         $record->delete();
-        flash('Deleted')->success();
+        flash('Client Deleted')->success();
         return back();
     }
 }

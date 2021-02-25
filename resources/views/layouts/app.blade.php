@@ -75,14 +75,6 @@
         <div class="image">
           <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
-        <div class="info">
-          @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>               
-            @endif
-            <a href="#" class="d-block"> {{auth()->user()->name}} </a>
-        </div>
       </div>
 
       <!-- Sidebar Menu -->

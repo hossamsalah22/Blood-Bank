@@ -29,7 +29,7 @@
                   <tr>
                     <td>{{$loop->iteration}}</td>
                     <td><a href="{{url(route('post.show', $record->id))}}">{{$record->title}}</a></td>
-                    <td> {{$record->category_id}} </td>
+                    <td> {{$record->category->name}} </td>
                     <td class="text-center">
                       <a href="{{url(route('post.edit', $record->id))}}" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>   
                     </td>
