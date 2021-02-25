@@ -132,6 +132,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{route('post.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-list"></i>
+              <p>Post</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>Settings</p>

@@ -37,7 +37,7 @@ Route::group(
                 Route::post('profile', 'AuthCycle\ProfileController@index');
                 Route::post('donations/create', 'MainCycle\DonationsController@createRequest');
                 Route::get('donations', 'MainCycle\DonationsController@index');
-                Route::get('settings', 'Admin\SettingsController@index');
+                Route::get('settings', 'SettingsController@index');
                 Route::post('favouration', 'MainCycle\PostsController@favouration');
                 Route::get('favourites', 'MainCycle\PostsController@favourites');
                 Route::post('new-device', 'AuthCycle\NotificationsController@registerToken');

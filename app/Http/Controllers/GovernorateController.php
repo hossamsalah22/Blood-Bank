@@ -55,7 +55,8 @@ class GovernorateController extends Controller
     public function show($id)
     {
          $model = Governorate::findOrFail($id);
-         return view('governorates.show', compact('model'));
+         $record = $model->cities();
+         return view('governorates.show', compact('model', 'record'));
     }
 
     /**

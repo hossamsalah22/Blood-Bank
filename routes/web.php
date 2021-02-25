@@ -22,6 +22,7 @@ Route::get('/', function () {
 Route::resource('governorate', 'App\Http\Controllers\GovernorateController');
 Route::resource('city', 'App\Http\Controllers\CitiesController');
 Route::resource('category', 'App\Http\Controllers\CategoriesController');
+Route::resource('post', 'App\Http\Controllers\PostsController');
 
 Auth::routes();
 
