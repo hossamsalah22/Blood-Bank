@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\City;
-use App\Models\Governorate;
-use Illuminate\Contracts\Validation\Validator;
+use App\Models\BloodType;
 use Illuminate\Http\Request;
 
-class CitiesController extends Controller
+class BloodTypesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,8 @@ class CitiesController extends Controller
      */
     public function index()
     {
-        $record = City::paginate(10);
-        return view('cities.index', compact('record'));
+        $record = BloodType::all();
+        return view('blood_types.index', compact('record'));
     }
 
     /**
@@ -27,10 +25,7 @@ class CitiesController extends Controller
      */
     public function create()
     {
-        return view('cities.create', [
-            'governorate' => Governorate::all(),
-            ]
-        );
+        //
     }
 
     /**
@@ -41,15 +36,7 @@ class CitiesController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'name' => 'required',
-            'governorate_id' => 'required|exists:governorates,id'
-        ];
-        $this->validate($request, $rules);
-
-        $record = City::create($request->all());
-        flash('Success')->success();
-        return redirect(route('city.index'));
+        //
     }
 
     /**
@@ -60,9 +47,9 @@ class CitiesController extends Controller
      */
     public function show($id)
     {
-        $model = City::findOrFail($id);
+        $model = BloodType::findOrFail($id);
         $record = $model->clients;
-        return view('cities.show', compact('model', 'record'));
+        return view('blood_types.show', compact('model', 'record'));
     }
 
     /**
@@ -73,8 +60,7 @@ class CitiesController extends Controller
      */
     public function edit($id)
     {
-        $model = City::findOrFail($id);
-        return view('cities.edit', compact('model'));
+        //
     }
 
     /**
@@ -86,10 +72,7 @@ class CitiesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $record = City::findOrFail($id);
-        $record->update($request->all());
-        flash('Success')->success();
-        return redirect(route('city.index'));
+        //
     }
 
     /**
@@ -100,9 +83,6 @@ class CitiesController extends Controller
      */
     public function destroy($id)
     {
-        $record = City::findOrFail($id);
-        $record->delete();
-        flash('Deleted')->success();
-        return back();
+        //
     }
 }

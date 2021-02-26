@@ -1,42 +1,29 @@
 @extends('layouts.app')
 @section('page_title')
-  City    
+  Blood Type    
 @endsection
 @section('content')
 
   <!-- Main content -->
   <section class="content">
-      <div class="card-body">
+      <div class="card-body">        
           <div class="table-responsive">
             <div class="box-body">
               <table class="table table-bordered">
                 <thead>
                   <tr>
                     <th style="width: 10px">#</th>
-                    <th>Name</th>
-                    <th class="text-center">Edit</th>
-                    <th class="text-center">Delete</th>
+                    <th>Blood Type</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>{{$model->id}}</td>
                     <td>{{$model->name}}</td>
-                    <td class="text-center">
-                      <a href="{{url(route('city.edit', $model->id))}}" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>   
-                    </td>
-                    <td class="text-center">
-                      {!! Form::open([
-                        'action' => ['App\Http\Controllers\CitiesController@destroy', $model->id],
-                        'method' => 'delete'
-                      ]) !!}
-                      <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
-                      {!! Form::close() !!}
-                    </td>
                   </tr>
                 </tbody>
               </table>
-              {{-- Clients in the City --}}
+              {{-- Cities Table Related to the Governorate --}}
               <table class="table table-bordered">
                 <thead>
                   <h1>Available Clients</h1>
@@ -44,21 +31,23 @@
                   <tr>
                     <th style="width: 10px">#</th>
                     <th>Name</th>
-                    <th>Phone</th>
-                    <th>Blood Type</th>
+                    <th>City</th>
+                    <th class="text-center">Edit</th>
                     <th class="text-center">Delete</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($record As $record)
+                  @foreach($record as $record)
                   <tr>
-                    <td>{{$record->id}}</td>
+                    <td>{{$loop->iteration}}</td>
                     <td><a href="{{url(route('client.show', $record->id))}}">{{$record->name}}</a></td>
-                    <td>{{$record->phone}}</td>
-                    <td>{{$record->BloodType->name}}</td>
+                    <td><a href="{{url(route('city.show', $record->city->id))}}">{{$record->city->name}}</a></td>
+                    <td class="text-center">
+                      <a href="{{url(route('client.edit', $record->id))}}" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>   
+                    </td>
                     <td class="text-center">
                       {!! Form::open([
-                        'action' => ['App\Http\Controllers\ClientsController@destroy', $model->id],
+                        'action' => ['App\Http\Controllers\CitiesController@destroy', $record->id],
                         'method' => 'delete'
                       ]) !!}
                       <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>

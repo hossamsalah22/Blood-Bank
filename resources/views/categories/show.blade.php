@@ -23,11 +23,11 @@
                     <td>{{$model->id}}</td>
                     <td>{{$model->name}}</td>
                     <td class="text-center">
-                      <a href="{{url(route('governorate.edit', $model->id))}}" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>   
+                      <a href="{{url(route('category.edit', $model->id))}}" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>   
                     </td>
                     <td class="text-center">
                       {!! Form::open([
-                        'action' => ['App\Http\Controllers\GovernorateController@destroy', $model->id],
+                        'action' => ['App\Http\Controllers\CategoriesController@destroy', $model->id],
                         'method' => 'delete'
                       ]) !!}
                       <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
@@ -35,6 +35,43 @@
                     </td>
                   </tr>
                 </tbody>
+              </table>
+              {{-- posts table --}}
+              <table class="table table-bordered">
+                <thead>
+                  <h1>Available Posts</h1>
+                  @if(count($record))
+                  <tr>
+                    <th style="width: 10px">#</th>
+                    <th>title</th>
+                    <th class="text-center">Edit</th>
+                    <th class="text-center">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($record as $record)
+                  <tr>
+                    <td>{{$loop->iteration}}</td>
+                    <td><a href="{{url(route('post.show', $record->id))}}">{{$record->title}}</a></td>
+                    <td class="text-center">
+                      <a href="{{url(route('post.edit', $record->id))}}" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>   
+                    </td>
+                    <td class="text-center">
+                      {!! Form::open([
+                        'action' => ['App\Http\Controllers\PostsController@destroy', $model->id],
+                        'method' => 'delete'
+                      ]) !!}
+                      <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                      {!! Form::close() !!}
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+                @else
+                  <div class="alert alert-danger" role="alert">
+                    No Posts Found
+                  </div>
+                @endif
               </table>
             </div>
           </div>

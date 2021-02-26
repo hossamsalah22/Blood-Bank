@@ -106,6 +106,18 @@
             </ul>
           </li>
           <li class="nav-item">
+            <a href="{{route('client.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>Clients</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('blood-type.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-bb"></i>
+              <p>Blood Types</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{route('governorate.index')}}" class="nav-link">
               <i class="nav-icon fas fa-list"></i>
               <p>Governorate</p>

@@ -55,7 +55,8 @@ class CategoriesController extends Controller
     public function show($id)
     {
         $model = Category::findOrFail($id);
-        return view('categories.show', compact('model'));
+        $record = $model->posts;
+        return view('categories.show', compact('model', 'record'));
     }
 
     /**

@@ -28,6 +28,7 @@ Route::group(
         Route::resource('category', 'CategoriesController');
         Route::resource('post', 'PostsController');
         Route::resource('client', 'ClientsController');
+        Route::resource('blood-type', 'BloodTypesController');
     }
 );
 

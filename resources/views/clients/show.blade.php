@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('page_title')
-  City    
+  Client    
 @endsection
 @section('content')
 
@@ -26,12 +26,12 @@
                 <tbody>
                   <tr>
                     <td>{{$record->id}}</td>
-                    <td><a href="{{url(route('client.show', $record->id))}}">{{$record->name}}</a></td>
+                    <td>{{$record->name}}</td>
                     <td> {{$record->phone}} </td>
                     <td> {{$record->email}} </td>
-                    <td> {{$record->City->name}} </td>
+                    <td> <a href="{{url(route('city.show', $record->city->id))}}">{{$record->City->name}}</a> </td>
                     <td> {{$record->d_o_b}} </td>
-                    <td> {{$record->BloodType->name}} </td>
+                    <td> <a href="{{url(route('blood-type.show', $record->BloodType->id))}}">{{$record->BloodType->name}}</a> </td>
                     <td> {{$record->last_donation}} </td>
                     <td class="text-center">
                       {!! Form::open([
