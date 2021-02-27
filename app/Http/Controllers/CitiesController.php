@@ -27,10 +27,9 @@ class CitiesController extends Controller
      */
     public function create()
     {
-        return view('cities.create', [
-            'governorate' => Governorate::all(),
-            ]
-        );
+        $governorate = Governorate::all()
+            ->sortBy('name')->pluck('name', 'id');
+        return view('cities.create', compact('governorate'));
     }
 
     /**
@@ -62,7 +61,8 @@ class CitiesController extends Controller
     {
         $model = City::findOrFail($id);
         $record = $model->clients;
-        return view('cities.show', compact('model', 'record'));
+        $donation = $model->donation_requests;
+        return view('cities.show', compact('model', 'record', 'donation'));
     }
 
     /**

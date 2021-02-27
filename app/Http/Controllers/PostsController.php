@@ -26,10 +26,8 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create', [
-            'category' => Category::all(),
-            ]
-        );
+        $category = Category::all()->sortBy('name')->pluck('name', 'id');
+        return view('posts.create', compact('category') );
     }
 
     /**

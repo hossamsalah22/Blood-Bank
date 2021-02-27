@@ -23,7 +23,7 @@
                   </tr>
                 </tbody>
               </table>
-              {{-- Cities Table Related to the Governorate --}}
+              {{-- Clients Table with the same Blood Type --}}
               <table class="table table-bordered">
                 <thead>
                   <h1>Available Clients</h1>
@@ -59,6 +59,49 @@
                 @else
                   <div class="alert alert-danger" role="alert">
                     No Clients Found
+                  </div>
+                @endif
+              </table>
+              {{-- Donation Requests With The Same BloodType --}}
+              <table class="table table-bordered">
+                <thead>
+                  <h3>Donation Requests</h3>
+                  @if(count($donation))
+                  <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Patient Name</th>
+                    <th>Patient City</th>
+                    <th>Required Blood Bags</th>
+                    <th class="text-center">Edit</th>
+                    <th class="text-center">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($donation As $donation)
+                  <tr>
+                    <td><a href="{{url(route('donation-request.show', $donation->id))}}">
+                      {{$loop->iteration}}</a></td>
+                    <td>{{$donation->name}}</td>
+                    <td><a href="{{url(route('city.show', $donation->city_id))}}">
+                        {{$donation->city->name}}</a></td>
+                    <td>{{$donation->blood_bags_num}}</td>
+                    <td class="text-center">
+                      <a href="{{url(route('donation-request.edit', $donation->id))}}" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>   
+                    </td>
+                    <td class="text-center">
+                      {!! Form::open([
+                        'action' => ['App\Http\Controllers\DonationRequestsController@destroy', $donation->id],
+                        'method' => 'delete'
+                      ]) !!}
+                      <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                      {!! Form::close() !!}
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+                @else
+                  <div class="alert alert-danger" role="alert">
+                    No Requests Found
                   </div>
                 @endif
               </table>

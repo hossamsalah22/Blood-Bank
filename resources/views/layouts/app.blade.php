@@ -112,38 +112,44 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{route('donation-request.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-plus-square"></i>
+              <p>Donation Requests</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{route('blood-type.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-bb"></i>
+              <i class="nav-icon fas fa-heart"></i>
               <p>Blood Types</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{route('governorate.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-list"></i>
+              <i class="nav-icon fas fa-city"></i>
               <p>Governorate</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{route('city.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-list"></i>
+              <i class="nav-icon fas fa-city"></i>
               <p>City</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{route('category.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-list"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>Category</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{route('post.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-list"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>Post</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
+              <i class="nav-icon fas fa-cog"></i>
               <p>Settings</p>
             </a>
           </li>
@@ -175,7 +181,7 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">@yield('page_title')</h3>
+        <h1 class="card-title">@yield('page_title')</h1>
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
             <i class="fas fa-minus"></i>

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
+use App\Models\BloodType;
+use App\Models\DonationRequest;
 use Illuminate\Http\Request;
 
-class ClientsController extends Controller
+class DonationRequestsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,8 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $record = Client::all();
-        return view('clients.index', compact('record'));
+        $model = DonationRequest::all();
+        return view('donations.index', compact('model'));
     }
 
     /**
@@ -47,9 +48,8 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
-        $record = Client::findOrFail($id);
-        $donation = $record->donation_requests;
-        return view('clients.show', compact('record', 'donation'));
+        $model = DonationRequest::findOrFail($id);
+        return view('donations.show', compact('model'));
     }
 
     /**
@@ -83,9 +83,9 @@ class ClientsController extends Controller
      */
     public function destroy($id)
     {
-        $record = Client::findOrFail($id);
-        $record->delete();
-        flash('Client Deleted')->success();
+        $model = DonationRequest::findorFail($id);
+        $model->delete();
+        flash('Donation Deleted')->success();
         return back();
     }
 }

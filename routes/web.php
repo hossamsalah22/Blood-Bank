@@ -29,6 +29,7 @@ Route::group(
         Route::resource('post', 'PostsController');
         Route::resource('client', 'ClientsController');
         Route::resource('blood-type', 'BloodTypesController');
+        Route::resource('donation-request', 'DonationRequestsController');
     }
 );
 

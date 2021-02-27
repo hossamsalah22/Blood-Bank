@@ -11,10 +11,10 @@
 'class' => 'form-control'
 ]) !!}
     
-    <label for="category">Select Category</label>
-    
+    {{-- <label for="category">Select Category</label> --}}
+    {!! Form::label('Category') !!}
     {!! 
-    Form::select('category_id',['category' => $category->pluck('name')],Null,['class' => 'form-control'])
+    Form::select('category_id',$category,Null,['class' => 'form-control','placeholder' => 'Select Category'])
      !!}
     
 </div>

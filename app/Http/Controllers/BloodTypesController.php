@@ -49,7 +49,8 @@ class BloodTypesController extends Controller
     {
         $model = BloodType::findOrFail($id);
         $record = $model->clients;
-        return view('blood_types.show', compact('model', 'record'));
+        $donation = $model->donation_requests;
+        return view('blood_types.show', compact('model', 'record', 'donation'));
     }
 
     /**
