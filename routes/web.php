@@ -30,6 +30,8 @@ Route::group(
         Route::resource('client', 'ClientsController');
         Route::resource('blood-type', 'BloodTypesController');
         Route::resource('donation-request', 'DonationRequestsController');
+        Route::resource('setting', 'SettingsController');
+        Route::resource('contact', 'ContactsController');
     }
 );
 
