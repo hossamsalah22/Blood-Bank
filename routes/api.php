@@ -43,6 +43,7 @@ Route::group(
                 Route::post('new-device', 'AuthCycle\NotificationsController@registerToken');
                 Route::post('remove-device', 'AuthCycle\NotificationsController@removeToken');
                 Route::post('notification-settings', 'AuthCycle\NotificationsController@settings');
+                Route::post('contact-us', 'ContactsController@contactUs');
             }
         );
     }

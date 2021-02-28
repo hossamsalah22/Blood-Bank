@@ -1,20 +1,18 @@
 @extends('layouts.app')
 @section('page_title')
-  Contact Us    
+  Message    
 @endsection
 @section('content')
 
   <!-- Main content -->
   <section class="content">
       <div class="card-body">
-        @include('flash::message')
-          @if(count($model))
           <div class="table-responsive">
             <div class="box-body">
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th style="width: 10px">#</th>
+                    <th style="width: 10px">ID</th>
                     <th>Title</th>
                     <th>Subject</th>
                     <th>Phone</th>
@@ -23,10 +21,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($model as $model)
                   <tr>
-                    <td>{{$loop->iteration}}</td>
-                    <td><a href="{{url(route('contact.show', $model->id))}}">{{$model->title}}</a></td>
+                    <td>{{$model->id}}</td>
+                    <td>{{$model->title}}</td>
                     <td> {{$model->subject}} </td>
                     <td> {{$model->phone}} </td>
                     <td> {{$model->email}} </td>
@@ -39,16 +36,10 @@
                       {!! Form::close() !!}
                     </td>
                   </tr>
-                  @endforeach
                 </tbody>
               </table>
             </div>
           </div>
-          @else
-            <div class="alert alert-danger" role="alert">
-              No Data Found
-            </div>
-          @endif
       </div>
       <!-- /.card-body -->
     </div>

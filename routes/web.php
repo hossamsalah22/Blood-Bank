@@ -32,14 +32,14 @@ Route::group(
         Route::resource('donation-request', 'DonationRequestsController');
         Route::resource('setting', 'SettingsController');
         Route::resource('contact', 'ContactsController');
+        Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+        Route::get('home', 'HomeController@index')->name('home');
+        Route::resource('change-password', 'ChangePasswordController');
     }
 );
 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

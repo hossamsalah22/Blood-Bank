@@ -48,7 +48,7 @@ class ContactsController extends Controller
     public function show($id)
     {
         $model = Contact::findOrFail($id);
-        return view('contacts.show', compact($model));
+        return view('contacts.show', compact('model'));
     }
 
     /**
