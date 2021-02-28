@@ -25,26 +25,17 @@
     <ul class="navbar-nav ml-auto">
       {{-- User Actions --}}
       <li class="dropdown menu">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-          <span class="hidden-xs">{{Auth::user()->name}}</span>
-        </a>
-        <ul class="dropdown-menu">
-          <!-- Menu Footer-->
-          <li class="user-footer">
-            {{-- Change Password --}}
-            <div class="pull-left">
-              <a href="{{url(route('change-password.index'))}}" class="btn btn-default btn-flat">Change Password</a>
-            </div>
-            {{-- logout --}}
-            <div class="pull-right">
-              <a href="#" class="btn btn-default btn-flat" 
-                onclick="event.preventDefault();document.getElementById('logout-form').submit();">Sign out</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                  {{ csrf_field() }}
-                </form>
-            </div>
-          </li>
-        </ul>
+        <!-- Menu Footer-->
+        <li class="user-footer">
+          {{-- logout --}}
+          <div class="pull-right">
+            <a href="#" class="btn btn-default btn-flat" 
+              onclick="event.preventDefault();document.getElementById('logout-form').submit();">Sign out</a>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+              </form>
+          </div>
+        </li>
       </li>
     </ul>
   </nav>
@@ -140,6 +131,12 @@
               <p>Contacts</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{url(route('change-password.index'))}}" class="nav-link">
+            <i class="nav-icon fas fa-file"></i>
+            <p>Change Password</p>
+          </a>
+        </li>
           <li class="nav-item">
             <a href="{{route('setting.index')}}" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
