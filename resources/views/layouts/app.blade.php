@@ -143,6 +143,18 @@
               <p>Settings</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{route('user.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>Users</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('role.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-list"></i>
+              <p>Roles</p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -211,5 +223,8 @@
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
+
+@stack('roles')
+
 </body>
 </html>

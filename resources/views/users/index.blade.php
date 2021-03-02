@@ -1,59 +1,60 @@
 @extends('layouts.app')
+@inject('roles', 'Spatie\Permission\Models\Role')
 @section('page_title')
-  Donation Request    
+  Users    
 @endsection
 @section('content')
 
   <!-- Main content -->
   <section class="content">
       <div class="card-body">
+        <a href="{{route('user.create')}}" class="btn btn-primary">
+          <i class="fa fa-plus"></i>
+           New User</a>
+        @include('flash::message')
+          @if(count($model))
           <div class="table-responsive">
             <div class="box-body">
               <table class="table table-bordered">
                 <thead>
                   <tr>
                     <th style="width: 10px">#</th>
-                    <th>Patient Name</th>
-                    <th>Patient Phone</th>
-                    <th>Patient Blood type</th>
-                    <th>Patient Age</th>
-                    <th>Required Blood Bags</th>
-                    <th>City</th>
-                    <th>Hospital Name</th>
-                    <th>Hospital Address</th>
-                    <th>Client Name</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
                     <th class="text-center">Edit</th>
                     <th class="text-center">Delete</th>
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach ($model as $model)
                   <tr>
-                    <td>{{$model->id}}</td>
+                    <td>{{$loop->iteration}}</td>
                     <td>{{$model->name}}</td>
-                    <td>{{$model->phone}}</td>
-                    <td>{{$model->blood_type->name}}</td>
-                    <td>{{$model->patient_age}}</td>
-                    <td>{{$model->blood_bags_num}}</td>
-                    <td>{{$model->city->name}}</td>
-                    <td>{{$model->hospital_name}}</td>
-                    <td>{{$model->hospital_address}}</td>
-                    <td>{{$model->client->name}}</td>
+                    <td>{{$model->email}}</td>
+                    <td>{{$model->roles()->pluck('name')}}</td>
                     <td class="text-center">
-                      <a href="{{url(route('donation-request.edit', $model->id))}}" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>   
+                      <a href="{{url(route('user.edit', $model->id))}}" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>   
                     </td>
                     <td class="text-center">
                       {!! Form::open([
-                        'action' => ['App\Http\Controllers\DonationRequestsController@destroy', $model->id],
+                        'action' => ['App\Http\Controllers\UsersController@destroy', $model->id],
                         'method' => 'delete'
                       ]) !!}
                       <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
                       {!! Form::close() !!}
                     </td>
                   </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
           </div>
+          @else
+            <div class="alert alert-danger" role="alert">
+              No Data Found
+            </div>
+          @endif
       </div>
       <!-- /.card-body -->
     </div>
