@@ -21,13 +21,14 @@
             {!! Form::label('social media :') !!}
                 <div class="text-center">
                     <a href="{{$model->fb_link}}" class="btn btn-social-icon btn-facebook" target="_blank">
-                        <i class="fa fa-facebook"></i></a>
+                        <i class="fab fa-facebook"></i></a>
                     <a href="{{$model->tw_link}}" class="btn btn-social-icon btn-instagram" target="_blank">
-                        <i class="fa fa-instagram"></i></a>
+                        <i class="fab fa-twitter"></i></a>
                     <a href="{{$model->insta_link}}" class="btn btn-social-icon btn-twitter" target="_blank">
-                        <i class="fa fa-twitter"></i></a>
+                        <i class="fab fa-instagram"></i></a>
                     <a href="{{$model->youtube_link}}" class="btn btn-social-icon btn-youtube" target="_blank">
-                        <i class="fa fa-youtube"></i></a>
+                        <i class="fab fa-youtube"></i></a>
+
                 </div>
                 <a href="{{url(route('setting.edit', $model->id))}}" class="btn btn-primary btn-xs">
                     <i class="fa fa-gear"></i>

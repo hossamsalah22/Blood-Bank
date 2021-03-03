@@ -7,11 +7,9 @@
   <!-- Main content -->
   <section class="content">
       <div class="card-body">
-        @role('Admin')
         <a href="{{route('post.create')}}" class="btn btn-primary">
           <i class="fa fa-plus"></i>
            New Post</a>
-        @endrole
         @include('flash::message')
           @if(count($record))
           <div class="table-responsive">

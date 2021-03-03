@@ -14,15 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get(
-    '/', function () { return view('welcome');
+
+Route::group(
+    ['namespace' => 'App\Http\Controllers\Front\Ar'], function () {
+        Route::get('/', 'MainController@home');
+        Route::resource('posts', 'PostsController');
+        Route::resource('register', 'ClientsController');
     }
 );
 
+
 Route::group(
-    ['namespace' => 'App\Http\Controllers', 'middleware' => ['auth:web',
+    ['namespace' => 'App\Http\Controllers','prefix' => 'admin', 'middleware' => ['auth:web',
      'App\Http\Middleware\AutoCheckPermission']], function () {
-        Route::get('home', 'HomeController@index');
+        Route::resource('home', 'HomeController');
         Route::post('logout', 'Auth\LoginController@logout');
         Route::resource('governorate', 'GovernorateController');
         Route::resource('city', 'CitiesController');
@@ -39,7 +44,9 @@ Route::group(
     }
 );
 
-Auth::routes();
+Route::get(
+    '/admin', function () { return view('welcome');
+    }
+);
 
-
-
+Auth::routes(['register' => false]);

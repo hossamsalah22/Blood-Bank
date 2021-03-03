@@ -45,7 +45,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="/home" class="brand-link">
+    <a href="{{route('home.index')}}" class="brand-link">
       <img src="../../dist/img/blood-bank.png"
            alt="BloodBank Logo"
            class="brand-image img-circle elevation-3"
@@ -172,7 +172,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/home">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{route('home.index')}}">Home</a></li>
               <li class="breadcrumb-item active">Dashboard</li>
             </ol> 
           </div>

@@ -16,6 +16,9 @@ class CreateSettingsTable extends Migration {
 			$table->string('tw_link');
 			$table->string('insta_link');
 			$table->string('youtube_link');
+			$table->string('whatsapp_link');
+			$table->string('phone');
+			$table->string('email');
 		});
 	}
 

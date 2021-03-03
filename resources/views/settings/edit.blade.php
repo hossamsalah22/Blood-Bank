@@ -32,8 +32,21 @@
             <label for="insta_link">Instagram URL</label>
             {!! Form::text('insta_link',Null,[
             'class' => 'form-control'
-            ]) !!}<label for="youtube_link">Youtube URL</label>
+            ]) !!}
+            <label for="youtube_link">Youtube URL</label>
             {!! Form::text('youtube_link',Null,[
+            'class' => 'form-control'
+            ]) !!}
+            <label for="whatsapp_link">Whatsapp URL</label>
+            {!! Form::text('whatsapp_link',Null,[
+            'class' => 'form-control'
+            ]) !!}
+            <label for="phone">Phone</label>
+            {!! Form::text('phone',Null,[
+            'class' => 'form-control'
+            ]) !!}
+            <label for="email">E-mail</label>
+            {!! Form::text('email',Null,[
             'class' => 'form-control'
             ]) !!}
         </div>

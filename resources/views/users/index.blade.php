@@ -32,7 +32,7 @@
                     <td>{{$loop->iteration}}</td>
                     <td>{{$model->name}}</td>
                     <td>{{$model->email}}</td>
-                    <td>{{$model->roles()->pluck('name')}}</td>
+                    <td>{{$model->getRoleNames()}}</td>
                     <td class="text-center">
                       <a href="{{url(route('user.edit', $model->id))}}" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>   
                     </td>
@@ -62,3 +62,4 @@
   </section>
   <!-- /.content -->
 @endsection
+

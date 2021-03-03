@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @inject('client', 'App\Models\Client')
 @inject('donations', 'App\Models\DonationRequest')
-
 @section('content')
 
   <!-- Main content -->
