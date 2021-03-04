@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Web\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -37,15 +38,8 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $rules = [
-            'name' => 'required',
-            'password' => 'required|confirmed',
-            'email' => 'required',
-            'list_roles' => 'required' 
-        ];
-        $this->validate($request, $rules);
         $request->merge(['password' => bcrypt($request->password)]);
         $user = User::create($request->except('list_roles'));
         $user->assignRole($request->input('list_roles'));
@@ -84,15 +78,8 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        $rules = [
-            'name' => 'required',
-            'password' => 'required|confirmed',
-            'email' => 'required',
-            'list_roles' => 'required' 
-        ];
-        $this->validate($request, $rules);
         $model = User::findOrFail($id);
         $request->merge(['password' => bcrypt($request->password)]);
         $model->syncRoles($request->input('list_roles'));

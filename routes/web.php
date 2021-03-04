@@ -26,7 +26,7 @@ Route::group(
 
 Route::group(
     ['namespace' => 'App\Http\Controllers','prefix' => 'admin', 'middleware' => ['auth:web',
-     'App\Http\Middleware\AutoCheckPermission']], function () {
+    'App\Http\Middleware\AutoCheckPermission']], function () {
         Route::resource('home', 'HomeController');
         Route::post('logout', 'Auth\LoginController@logout');
         Route::resource('governorate', 'GovernorateController');

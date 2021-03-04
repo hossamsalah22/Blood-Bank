@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Api\AuthCycle;
 
 use App\Http\Controllers\Controller;
-use App\Models\BloodType;
-use App\Models\Governorate;
 use App\Models\Token;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 
 class NotificationsController extends Controller
@@ -15,7 +12,8 @@ class NotificationsController extends Controller
     public function settings(Request $request)
     {
         $validator = Validator()->make(
-            $request->all(), [
+            $request->all(),
+            [
                 'governorate_id' => 'exists:governorates,id',
                 'blood_type_id' => 'exists:blood_types,id'
             ]
@@ -35,13 +33,13 @@ class NotificationsController extends Controller
         }
 
         return responseJson(1, 'Data Updated Successfully');
-
     }
 
     public function registerToken(Request $request)
     {
         $validator = Validator()->make(
-            $request->all(), [
+            $request->all(),
+            [
                 'token' => 'required',
                 'type' => 'required|in:android,ios',
             ]
@@ -49,7 +47,6 @@ class NotificationsController extends Controller
 
         if ($validator->fails()) {
             return responseJson(0, $validator->errors()->first());
-            
         }
 
         Token::where('token', $request->token)->delete();
@@ -60,7 +57,8 @@ class NotificationsController extends Controller
     public function removeToken(Request $request)
     {
         $validator = Validator()->make(
-            $request->all(), [
+            $request->all(),
+            [
                 'token' => 'required',
             ]
         );

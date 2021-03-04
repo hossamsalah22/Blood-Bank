@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class CitiesController extends Controller
 {
-    public function index( Request $request)
+    public function index(Request $request)
     {
         $cities = City::where(
             function ($query) use ($request) {

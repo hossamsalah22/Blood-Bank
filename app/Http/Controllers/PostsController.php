@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Web\PostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class PostsController extends Controller
     public function create()
     {
         $category = Category::all()->sortBy('name')->pluck('name', 'id');
-        return view('posts.create', compact('category') );
+        return view('posts.create', compact('category'));
     }
 
     /**
@@ -38,13 +39,6 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'title' => 'required|min:6',
-            'content' => 'required',
-            'image' => 'required',
-            'category_id' => 'required|exists:categories,id'
-        ];
-        $this->validate($request, $rules);
         $record = Post::create($request->all());
         flash('Success')->success();
         return redirect(route('post.index'));
@@ -71,7 +65,8 @@ class PostsController extends Controller
     public function edit($id)
     {
         $model = Post::findOrFail($id);
-        return view('posts.edit', compact('model'));
+        $category = $model->category->pluck('name', 'id');
+        return view('posts.edit', compact('model', 'category'));
     }
 
     /**
@@ -81,7 +76,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
         $record = Post::findOrFail($id);
         $record->update($request->all());

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Api\MainCycle;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller

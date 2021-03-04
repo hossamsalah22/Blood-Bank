@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Web\CityRequest;
 use App\Models\City;
 use App\Models\Governorate;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Request;
 
 class CitiesController extends Controller
 {
@@ -38,14 +37,8 @@ class CitiesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CityRequest $request)
     {
-        $rules = [
-            'name' => 'required',
-            'governorate_id' => 'required|exists:governorates,id'
-        ];
-        $this->validate($request, $rules);
-
         $record = City::create($request->all());
         flash('Success')->success();
         return redirect(route('city.index'));
@@ -74,7 +67,8 @@ class CitiesController extends Controller
     public function edit($id)
     {
         $model = City::findOrFail($id);
-        return view('cities.edit', compact('model'));
+        $governorate = $model->governorate->pluck('name', 'id');
+        return view('cities.edit', compact('model', 'governorate'));
     }
 
     /**
@@ -84,7 +78,7 @@ class CitiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CityRequest $request, $id)
     {
         $record = City::findOrFail($id);
         $record->update($request->all());

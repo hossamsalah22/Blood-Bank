@@ -42,7 +42,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getListRolesAttribute() {
+    public function getListRolesAttribute()
+    {
         return $this->roles()->pluck('id')->toArray();
     }
 }

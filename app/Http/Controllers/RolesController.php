@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Web\RoleRequest;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -34,13 +35,8 @@ class RolesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        $rules = [
-            'name' => 'required|unique:roles,name',
-            'permissions' => 'required|array'
-        ];
-        $this->validate($request, $rules);
         $model = Role::create($request->all());
         $model->givePermissionTo($request->permissions);
         flash('Success')->success();

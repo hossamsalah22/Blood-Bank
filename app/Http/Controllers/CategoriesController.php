@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Web\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -34,12 +35,8 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $rules = [
-            'name' => 'required',
-        ];
-        $this->validate($request, $rules);
         $record = Category::create($request->all());
         flash('Success')->success();
 
@@ -78,7 +75,7 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         $record = Category::findOrFail($id);
         $record->update($request->all());

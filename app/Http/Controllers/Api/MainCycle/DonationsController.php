@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\MainCycle;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\DonationCreationRequest;
 use App\Models\DonationRequest;
 use App\Models\Token;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 
 class DonationsController extends Controller
@@ -13,8 +13,7 @@ class DonationsController extends Controller
     public function index(Request $request)
     {
         $donations = DonationRequest::where(
-            function ($query) use ($request)
-            {
+            function ($query) use ($request) {
                 if ($request->has('city_id')) {
                     if ($request->has('blood_type_id')) {
                         $query->where('blood_type_id', $request->blood_type_id)
@@ -31,30 +30,15 @@ class DonationsController extends Controller
         return responseJson(1, 'success', $donations);
     }
 
-    public function createRequest(Request $request)
+    public function createRequest(DonationCreationRequest $request)
     {
-        $data = [
-            'name' => 'required',
-            'phone' => 'required|digits:11',
-            'blood_type_id' => 'required|exists:blood_types,id',
-            'hospital_name' => 'required',
-            'patient_age' => 'required',
-            'city_id' => 'required|exists:cities,id',
-            'blood_bags_num' => 'required',
-            'hospital_address' => 'required',
-        ];
-
-        $validator = Validator()->make($request->all(), $data);
-        if ($validator->fails() ) {
-            return responseJson(0, $validator->errors()->first());
-        }
-
         $donateRequest = $request->user()->donation_requests()
             ->create($request->all());
 
         $clientsIDs = $donateRequest->city->governorate
             ->clients()->whereHas(
-                'blood_types', function ($query) use ($request) {
+                'blood_types',
+                function ($query) use ($request) {
                     $query->where('blood_type_id', $request->blood_type_id);
                 }
             )->pluck('clients.id')->toArray();
@@ -64,18 +48,18 @@ class DonationsController extends Controller
             $dNotification = $donateRequest->notifications()->create(
                 [
                     'title' => 'Donation Request NearBy',
-                    'content' => 'Need Donator for Blood Type ' . $donateRequest->blood_type->name ,
+                    'content' => 'Need Donator for Blood Type ' . $donateRequest->blood_type->name,
                     'donation_request_id' => $donateRequest->id,
                 ]
             );
-            
+
             // Attach Clients to the notificatrion
             $dNotification->clients()->attach($clientsIDs);
 
             $tokens = Token::whereIn('client_id', $clientsIDs)
                 ->where('token', '!=', null)
                 ->pluck('token')->toArray();
-            
+
             if (count($tokens)) {
                 $title = $dNotification->title;
                 $body = $dNotification->content;
@@ -83,9 +67,9 @@ class DonationsController extends Controller
                     'donation_request_id' => $donateRequest->id,
                 ];
                 $send = notifyByFirebase($title, $body, $tokens, $data);
-                info('result: '. $send);
+                info('result: ' . $send);
             }
-        }  
+        }
         return responseJson(1, 'Request Added Successfully', $donateRequest);
     }
 }

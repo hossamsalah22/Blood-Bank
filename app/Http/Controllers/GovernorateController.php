@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Web\GovernorateRequest;
 use App\Models\Governorate;
-use Illuminate\Http\Request;
 
 class GovernorateController extends Controller
 {
@@ -34,13 +34,8 @@ class GovernorateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GovernorateRequest $request)
     {
-        $rules = [
-            'name' => 'required'
-        ];
-        $this->validate($request, $rules);
-
         $record = Governorate::create($request->all());
         flash('Success')->success();
         return redirect(route('governorate.index'));
@@ -54,9 +49,9 @@ class GovernorateController extends Controller
      */
     public function show($id)
     {
-         $model = Governorate::findOrFail($id);
-         $record = $model->cities;
-         return view('governorates.show', compact('model', 'record'));
+        $model = Governorate::findOrFail($id);
+        $record = $model->cities;
+        return view('governorates.show', compact('model', 'record'));
     }
 
     /**
@@ -78,9 +73,8 @@ class GovernorateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GovernorateRequest $request, $id)
     {
-
         $record = Governorate::findOrFail($id);
         $record->update($request->all());
         flash('Updated')->success();

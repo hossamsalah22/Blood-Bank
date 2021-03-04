@@ -13,11 +13,7 @@
         ]) !!}
         <div class="form-group">
           @include('partials.validation_error')
-          <label for="name">Name</label>
-          {!! Form::text('name',Null,[
-          'class' => 'form-control'
-          ]) !!}
-        </div>
+          @include('cities.form')
         <div class="form-group">
             <button class="btn btn-primary" type="submit">Edit City</button>
         </div>

@@ -3,27 +3,13 @@
 namespace App\Http\Controllers\Api\AuthCycle;
 
 use App\Http\Controllers\Controller;
-use App\Models\BloodType;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use App\Http\Requests\Api\ProfileRequest;
+
 
 class ProfileController extends Controller
 {
-    public function index( Request $request)
+    public function index(ProfileRequest $request)
     {
-        $validator = Validator()->make(
-            $request->all(), [
-                'password' => 'confirmed',
-                'email' => Rule::unique('clients', 'email')
-                    ->ignore($request->user()->id),
-                'phone' => Rule::unique('clients', 'phone')
-                    ->ignore($request->user()->id),
-            ]
-        );
-        if ($validator->fails()) {
-            return responseJson(0, $validator->errors()->first());
-        }
 
         $currntUser = $request->user();
         $currntUser->update($request->all());
@@ -42,9 +28,11 @@ class ProfileController extends Controller
             $currntUser->blood_types->attach($request->blood_type_id);
         }
         return responseJson(
-            1, 'data updated successfully', [
-            'api_token' => $currntUser->api_token,
-            'client' => $currntUser,
+            1,
+            'data updated successfully',
+            [
+                'api_token' => $currntUser->api_token,
+                'client' => $currntUser,
             ]
         );
     }
