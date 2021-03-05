@@ -40,6 +40,7 @@
               <table class="table table-bordered">
                 <thead>
                   <p>Cities</p>
+                  @if(count($model->cities))
                   <tr>
                     <th style="width: 10px">#</th>
                     <th>Name</th>
@@ -48,16 +49,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($record as $record)
+                  @foreach($model->cities as $city)
                   <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td><a href="{{url(route('city.show', $record->id))}}">{{$record->name}}</a></td>
+                    <td><a href="{{url(route('city.show', $city->id))}}">{{$city->name}}</a></td>
                     <td class="text-center">
-                      <a href="{{url(route('city.edit', $record->id))}}" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>   
+                      <a href="{{url(route('city.edit', $city->id))}}" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>   
                     </td>
                     <td class="text-center">
                       {!! Form::open([
-                        'action' => ['App\Http\Controllers\CitiesController@destroy', $record->id],
+                        'action' => ['App\Http\Controllers\CitiesController@destroy', $city->id],
                         'method' => 'delete'
                       ]) !!}
                       <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
@@ -66,6 +67,11 @@
                   </tr>
                   @endforeach
                 </tbody>
+                @else
+                  <div class="alert alert-danger" role="alert">
+                    No Cities Found
+                  </div>
+                @endif
               </table>
             </div>
           </div>

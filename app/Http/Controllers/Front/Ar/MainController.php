@@ -17,7 +17,9 @@ class MainController extends Controller
         $donations = DonationRequest::take(4)->get();
         $bloods = BloodType::all();
         $cities = City::all();
-        return view('front/ar.home', compact('posts', 'donations', 'bloods', 'cities')
+        return view(
+            'front/ar.home',
+            compact('posts', 'donations', 'bloods', 'cities')
         );
     }
 }

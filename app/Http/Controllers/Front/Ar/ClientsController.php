@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Front\Ar;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Front\RegisterRequest;
 use App\Models\BloodType;
+use App\Models\City;
 use App\Models\Client;
 use App\Models\Governorate;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 
 class ClientsController extends Controller
@@ -39,19 +40,8 @@ class ClientsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        $rules = [
-            'name' => 'required|max:25',
-            'phone' => 'required|unique:clients',
-            'email' => 'required|email|unique:clients',
-            'password' => 'required|min:6|confirmed',
-            'last_donation' => 'required',
-            'd_o_b' => 'required',
-            'city_id' => 'required|exists:cities,id',
-            'blood_type_id' => 'required|exists:blood_types,id',
-        ];
-        $this->validate($request, $rules);
         $record = Client::create($request->all());
         flash('Success')->success();
         return redirect(url('/'));

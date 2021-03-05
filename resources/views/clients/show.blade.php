@@ -25,17 +25,17 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{{$record->id}}</td>
-                    <td>{{$record->name}}</td>
-                    <td> {{$record->phone}} </td>
-                    <td> {{$record->email}} </td>
-                    <td> <a href="{{url(route('city.show', $record->city->id))}}">{{$record->City->name}}</a> </td>
-                    <td> {{$record->d_o_b}} </td>
-                    <td> <a href="{{url(route('blood-type.show', $record->BloodType->id))}}">{{$record->BloodType->name}}</a> </td>
-                    <td> {{$record->last_donation}} </td>
+                    <td>{{$model->id}}</td>
+                    <td>{{$model->name}}</td>
+                    <td> {{$model->phone}} </td>
+                    <td> {{$model->email}} </td>
+                    <td> <a href="{{url(route('city.show', $model->city->id))}}">{{$model->City->name}}</a> </td>
+                    <td> {{$model->d_o_b}} </td>
+                    <td> <a href="{{url(route('blood-type.show', $model->BloodType->id))}}">{{$model->BloodType->name}}</a> </td>
+                    <td> {{$model->last_donation}} </td>
                     <td class="text-center">
                       {!! Form::open([
-                        'action' => ['App\Http\Controllers\ClientsController@destroy', $record->id],
+                        'action' => ['App\Http\Controllers\ClientsController@destroy', $model->id],
                         'method' => 'delete'
                       ]) !!}
                       <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
@@ -48,7 +48,7 @@
               <table class="table table-bordered">
                 <thead>
                   <h3>Donation Requests</h3>
-                  @if(count($donation))
+                  @if(count($model->donation_requests))
                   <tr>
                     <th style="width: 10px">#</th>
                     <th>Patient Name</th>
@@ -59,7 +59,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($donation As $donation)
+                  @foreach($model->donation_requests As $donation)
                   <tr>
                     <td><a href="{{url(route('donation-request.show', $donation->id))}}">
                       {{$loop->iteration}}</a></td>

@@ -53,9 +53,7 @@ class CitiesController extends Controller
     public function show($id)
     {
         $model = City::findOrFail($id);
-        $record = $model->clients;
-        $donation = $model->donation_requests;
-        return view('cities.show', compact('model', 'record', 'donation'));
+        return view('cities.show', compact('model'));
     }
 
     /**

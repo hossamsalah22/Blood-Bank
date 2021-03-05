@@ -47,9 +47,8 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
-        $record = Client::findOrFail($id);
-        $donation = $record->donation_requests;
-        return view('clients.show', compact('record', 'donation'));
+        $model = Client::findOrFail($id);
+        return view('clients.show', compact('model'));
     }
 
     /**

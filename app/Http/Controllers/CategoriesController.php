@@ -39,7 +39,6 @@ class CategoriesController extends Controller
     {
         $record = Category::create($request->all());
         flash('Success')->success();
-
         return redirect(route('category.index'));
     }
 
@@ -52,8 +51,7 @@ class CategoriesController extends Controller
     public function show($id)
     {
         $model = Category::findOrFail($id);
-        $record = $model->posts;
-        return view('categories.show', compact('model', 'record'));
+        return view('categories.show', compact('model'));
     }
 
     /**

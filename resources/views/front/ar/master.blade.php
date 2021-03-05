@@ -21,7 +21,6 @@
         
         <!--style css-->
         <link rel="stylesheet" href="{{asset('front/css/style.css')}}">
-        
         <title>Blood Bank</title>
     </head>
     <body>
@@ -162,8 +161,6 @@
         </div>
         
         @yield('content')
-        
-       
         
         <!--footer-->
         <div class="footer">

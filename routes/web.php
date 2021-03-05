@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(
-    ['namespace' => 'App\Http\Controllers\Front\Ar'], function () {
+    ['namespace' => 'App\Http\Controllers\Front\Ar'],
+    function () {
         Route::get('/', 'MainController@home');
         Route::resource('posts', 'PostsController');
         Route::resource('register', 'ClientsController');
@@ -25,8 +26,11 @@ Route::group(
 
 
 Route::group(
-    ['namespace' => 'App\Http\Controllers','prefix' => 'admin', 'middleware' => ['auth:web',
-    'App\Http\Middleware\AutoCheckPermission']], function () {
+    ['namespace' => 'App\Http\Controllers', 'prefix' => 'admin', 'middleware' => [
+        'auth:web',
+        'App\Http\Middleware\AutoCheckPermission'
+    ]],
+    function () {
         Route::resource('home', 'HomeController');
         Route::post('logout', 'Auth\LoginController@logout');
         Route::resource('governorate', 'GovernorateController');
@@ -45,7 +49,9 @@ Route::group(
 );
 
 Route::get(
-    '/admin', function () { return view('welcome');
+    '/admin',
+    function () {
+        return view('welcome');
     }
 );
 

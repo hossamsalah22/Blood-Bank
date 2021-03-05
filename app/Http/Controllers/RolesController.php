@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Web\RoleRequest;
-use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
 class RolesController extends Controller
@@ -74,13 +73,8 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RoleRequest $request, $id)
     {
-        $rules = [
-            'name' => 'required|unique:roles,name,'.$id,
-            'permissions' => 'required|array'
-        ];
-        $this->validate($request, $rules);
         $model = Role::findOrFail($id);
         $model->syncPermissions($request->permissions);
         $model->update($request->all());

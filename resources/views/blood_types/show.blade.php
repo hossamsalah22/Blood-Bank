@@ -27,7 +27,7 @@
               <table class="table table-bordered">
                 <thead>
                   <h1>Available Clients</h1>
-                  @if(count($record))
+                  @if(count($model->clients))
                   <tr>
                     <th style="width: 10px">#</th>
                     <th>Name</th>
@@ -37,17 +37,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($record as $record)
+                  @foreach($model->clients as $client)
                   <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td><a href="{{url(route('client.show', $record->id))}}">{{$record->name}}</a></td>
-                    <td><a href="{{url(route('city.show', $record->city->id))}}">{{$record->city->name}}</a></td>
+                    <td><a href="{{url(route('client.show', $client->id))}}">{{$client->name}}</a></td>
+                    <td><a href="{{url(route('city.show', $client->city->id))}}">{{$client->city->name}}</a></td>
                     <td class="text-center">
-                      <a href="{{url(route('client.edit', $record->id))}}" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>   
+                      <a href="{{url(route('client.edit', $client->id))}}" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>   
                     </td>
                     <td class="text-center">
                       {!! Form::open([
-                        'action' => ['App\Http\Controllers\CitiesController@destroy', $record->id],
+                        'action' => ['App\Http\Controllers\CitiesController@destroy', $client->id],
                         'method' => 'delete'
                       ]) !!}
                       <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
@@ -66,7 +66,7 @@
               <table class="table table-bordered">
                 <thead>
                   <h3>Donation Requests</h3>
-                  @if(count($donation))
+                  @if(count($model->donation_requests))
                   <tr>
                     <th style="width: 10px">#</th>
                     <th>Patient Name</th>
@@ -77,7 +77,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($donation As $donation)
+                  @foreach($model->donation_requests As $donation)
                   <tr>
                     <td><a href="{{url(route('donation-request.show', $donation->id))}}">
                       {{$loop->iteration}}</a></td>
