@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Front\Ar;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Front\LoginRequest;
 use App\Http\Requests\Front\RegisterRequest;
 use App\Models\BloodType;
 use App\Models\City;
 use App\Models\Client;
 use App\Models\Governorate;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ClientsController extends Controller
 {
@@ -17,34 +18,21 @@ class ClientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function register()
     {
-        //
+        return view('front/ar.register');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $governorates = Governorate::all();
-        $bloodTypes = BloodType::all();
-        return view('front/ar.register', compact('governorates', 'bloodTypes'));
-    }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RegisterRequest $request)
+    public function registerCreate(RegisterRequest $request)
     {
         $record = Client::create($request->all());
         flash('Success')->success();
-        return redirect(url('/'));
+        return redirect(url('/signIn'));
     }
 
     /**

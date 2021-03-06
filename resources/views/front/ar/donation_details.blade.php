@@ -1,4 +1,4 @@
-@extends('front/ar.master')
+{{-- @extends('front/ar.master') --}}
 @section('content')
         
 <!--ask-donation-->

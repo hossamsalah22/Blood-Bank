@@ -7,7 +7,6 @@ use App\Models\BloodType;
 use App\Models\City;
 use App\Models\DonationRequest;
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
@@ -22,4 +21,6 @@ class MainController extends Controller
             compact('posts', 'donations', 'bloods', 'cities')
         );
     }
+
+
 }

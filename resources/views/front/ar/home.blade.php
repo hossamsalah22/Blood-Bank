@@ -21,28 +21,6 @@
                     </div>
                 </div>
             </div>
-            <div class="carousel-item carousel-2">
-                <div class="container info">
-                    <div class="col-lg-5">
-                        <h3>بنك الدم نمضى قدما لصحة أفضل</h3>
-                        <p>
-                            هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص. 
-                        </p>
-                        <a href="#">المزيد</a>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item carousel-3">
-                <div class="container info">
-                    <div class="col-lg-5">
-                        <h3>بنك الدم نمضى قدما لصحة أفضل</h3>
-                        <p>
-                            هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي. 
-                        </p>
-                        <a href="#">المزيد</a>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     </div>
@@ -74,10 +52,10 @@
                         <div class="card">
                             <div class="photo">
                                 <img src="{{$post->image}}" class="card-img-top" alt="...">
-                                <a href="{{url(route('posts.show',$post->id))}}" class="click">المزيد</a>
+                                <a href="{{url('posts/'.$post->id)}}" class="click">المزيد</a>
                             </div>
                             <a href="#" class="favourite">
-                                <i class="far fa-heart"></i>
+                                <i onclick="toggleFavoutire(this)" class="far fa-heart first-heart"></i>
                             </a>
 
                             <div class="card-body">

@@ -18,9 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::group(
     ['namespace' => 'App\Http\Controllers\Front\Ar'],
     function () {
-        Route::get('/', 'MainController@home');
-        Route::resource('posts', 'PostsController');
-        Route::resource('register', 'ClientsController');
+        Route::get('register', 'ClientsController@register');
+        Route::post('register', 'ClientsController@registerCreate');
+        Route::group(
+            ['middleware' => 'auth:client'],
+            function () {
+                Route::get('/', 'MainController@home');
+                Route::resource('posts', 'PostsController');
+            }
+        );
     }
 );
 
