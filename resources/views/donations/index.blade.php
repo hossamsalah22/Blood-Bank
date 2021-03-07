@@ -19,7 +19,6 @@
                     <th>Blood Type</th>
                     <th>City</th>
                     <th>Client Name</th>
-                    <th class="text-center">Edit</th>
                     <th class="text-center">Delete</th>
                   </tr>
                 </thead>
@@ -34,9 +33,6 @@
                     <td><a href="{{url(route('city.show', $model->city_id))}}">
                         {{$model->city->name}}</a></td>
                     <td><a href="{{url(route('client.show',$model->client_id))}}">{{$model->client->name}}</a></td>
-                    <td class="text-center">
-                      <a href="{{url(route('donation-request.edit', $model->id))}}" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>   
-                    </td>
                     <td class="text-center">
                       {!! Form::open([
                         'action' => ['App\Http\Controllers\DonationRequestsController@destroy', $model->id],

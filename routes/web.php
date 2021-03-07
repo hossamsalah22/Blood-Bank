@@ -15,22 +15,32 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+// WebSite Routes
 Route::group(
     ['namespace' => 'App\Http\Controllers\Front\Ar'],
     function () {
-        Route::get('register', 'ClientsController@register');
-        Route::post('register', 'ClientsController@registerCreate');
+        Route::get('register', 'AuthController@register');
+        Route::post('toggle-favourite', 'MainController@toggleFavourite');
+        Route::post('register', 'AuthController@registerCreate');
+        Route::get('client/login', 'AuthController@login');
+        Route::post('client/login', 'AuthController@loginCheck');
         Route::group(
-            ['middleware' => 'auth:client'],
+            ['middleware' => 'auth:clients'],
             function () {
                 Route::get('/', 'MainController@home');
+                Route::get('/contact-us', 'MainController@contact');
+                Route::post('/contact-us', 'MainController@contactUs');
+                Route::get('/about-us', 'MainController@about');
+                Route::get('/donation-requests', 'MainController@donations');
+                Route::get('/donation-requests/{id}', 'MainController@donationDetails');
                 Route::resource('posts', 'PostsController');
             }
         );
     }
 );
 
-
+// Admin Dashboard Routes
+Auth::routes(['register' => false]);
 Route::group(
     ['namespace' => 'App\Http\Controllers', 'prefix' => 'admin', 'middleware' => [
         'auth:web',
@@ -60,5 +70,3 @@ Route::get(
         return view('welcome');
     }
 );
-
-Auth::routes(['register' => false]);

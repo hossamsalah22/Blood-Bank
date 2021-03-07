@@ -14,7 +14,7 @@
             </div>
             <div class="account-form">
                 {!! Form::open([
-    'action' => 'App\Http\Controllers\Front\Ar\ClientsController@registerCreate',
+    'action' => 'App\Http\Controllers\Front\Ar\AuthController@registerCreate',
 ]) !!}
                 <div class="form-group">
                     @include('partials.validation_error')

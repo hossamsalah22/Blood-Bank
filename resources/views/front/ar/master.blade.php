@@ -9,13 +9,13 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
         integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
     <!--google fonts css-->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!--font awesome css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-    <link rel="icon" href="imgs/Icon.png">
+    <link rel="icon" href="{{ asset('front/imgs/Icon.png') }}">
 
     <!--owl-carousel css-->
     <link rel="stylesheet" href="{{ asset('front/css/owl.carousel.min.css') }}">
@@ -135,34 +135,28 @@
                             <a class="nav-link" href="#">عن بنك الدم</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">المقالات</a>
+                            <a class="nav-link" href="/posts">المقالات</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="donation-requests.html">طلبات التبرع</a>
+                            <a class="nav-link" href="/donation-requests">طلبات التبرع</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="donation-requests.html">من نحن</a>
+                            <a class="nav-link" href="/about-us">من نحن</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact-us.html">اتصل بنا</a>
+                            <a class="nav-link" href="/contact-us">اتصل بنا</a>
                         </li>
                     </ul>
 
-                    <!--not a member-->
                     <div class="accounts">
                         <a href="{{ url('/register') }}" class="create">إنشاء حساب جديد</a>
-                        <a href="{{url('/signIn')}}" class="signin">الدخول</a>
+                        <a href="{{ url('/client/login') }}" class="signin">الدخول</a>
                     </div>
-
-                    <!--I'm a member
-
+                    {{-- I'm a member
                         <a href="#" class="donate">
-                            <img src="imgs/transfusion.svg">
+                            <img src="{{asset('front/imgs/transfusion.svg')}}">
                             <p>طلب تبرع</p>
-                        </a>
-
-                        -->
-
+                        </a> --}}
                 </div>
             </div>
         </nav>
@@ -185,18 +179,18 @@
                     </div>
                     <div class="pages col-md-4">
                         <div class="list-group" id="list-tab" role="tablist">
-                            <a class="list-group-item list-group-item-action active" id="list-home-list"
-                                href="index.html" role="tab" aria-controls="home">الرئيسية</a>
+                            <a class="list-group-item list-group-item-action active" id="list-home-list" href="/"
+                                role="tab" aria-controls="home">الرئيسية</a>
                             <a class="list-group-item list-group-item-action" id="list-profile-list" href="#" role="tab"
                                 aria-controls="profile">عن بنك الدم</a>
-                            <a class="list-group-item list-group-item-action" id="list-messages-list" href="#"
+                            <a class="list-group-item list-group-item-action" id="list-messages-list" href="/posts"
                                 role="tab" aria-controls="messages">المقالات</a>
                             <a class="list-group-item list-group-item-action" id="list-settings-list"
-                                href="donation-requests.html" role="tab" aria-controls="settings">طلبات التبرع</a>
-                            <a class="list-group-item list-group-item-action" id="list-settings-list"
-                                href="who-are-us.html" role="tab" aria-controls="settings">من نحن</a>
-                            <a class="list-group-item list-group-item-action" id="list-settings-list"
-                                href="contact-us.html" role="tab" aria-controls="settings">اتصل بنا</a>
+                                href="/donation-requests" role="tab" aria-controls="settings">طلبات التبرع</a>
+                            <a class="list-group-item list-group-item-action" id="list-settings-list" href="/about-us"
+                                role="tab" aria-controls="settings">من نحن</a>
+                            <a class="list-group-item list-group-item-action" id="list-settings-list" href="/contact-us"
+                                role="tab" aria-controls="settings">اتصل بنا</a>
                         </div>
                     </div>
                     <div class="stores col-md-4">
@@ -218,10 +212,12 @@
                 <div class="row">
                     <div class="social col-md-4">
                         <div class="icons">
-                            <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="{{ $settings->fb_link }}" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="{{ $settings->insta_link }}" class="instagram"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="{{ $settings->tw_link }}" class="twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="{{ $settings->youtube_link }}" class="whatsapp"><i
+                                    class="fab fa-whatsapp"></i></a>
                         </div>
                     </div>
                     <div class="rights col-md-8">
@@ -244,9 +240,14 @@
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+
     <script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"
         integrity="sha384-a9xOd0rz8w0J8zqj1qJic7GPFfyMfoiuDjC9rqXlVOcGO/dmRqzMn34gZYDTel8k" crossorigin="anonymous">
     </script>
+
 
     <script src="{{ asset('front/js/owl.carousel.min.js') }}"></script>
 
