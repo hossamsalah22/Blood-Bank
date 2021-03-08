@@ -46,6 +46,6 @@ class DonationCreationRequest extends FormRequest
             'city_id.required' => 'Please Choose The Patient City',
             'blood_bags_num.required' => 'Please Enter The Required Blood Bags',
             'hospital_address.required' => 'Please Enter The Hospital Address',
-        ]
+        ];
     }
 }

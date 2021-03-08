@@ -132,7 +132,7 @@
                             <a class="nav-link" href="/">الرئيسية <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">عن بنك الدم</a>
+                            <a class="nav-link" href="/about-us">عن بنك الدم</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/posts">المقالات</a>
@@ -147,16 +147,19 @@
                             <a class="nav-link" href="/contact-us">اتصل بنا</a>
                         </li>
                     </ul>
-
                     <div class="accounts">
-                        <a href="{{ url('/register') }}" class="create">إنشاء حساب جديد</a>
-                        <a href="{{ url('/client/login') }}" class="signin">الدخول</a>
+                        @guest
+                            @if (Route::has('login'))
+                                <a href="{{ url('/register') }}" class="create">إنشاء حساب جديد</a>
+                                <a href="{{ url('/client/login') }}" class="signin">الدخول</a>
+                            @endif
+                        @else
+                            <a href="#" class="donate">
+                                <img src="{{ asset('front/imgs/transfusion.svg') }}">
+                                <p>طلب تبرع</p>
+                            </a>
+                        @endguest
                     </div>
-                    {{-- I'm a member
-                        <a href="#" class="donate">
-                            <img src="{{asset('front/imgs/transfusion.svg')}}">
-                            <p>طلب تبرع</p>
-                        </a> --}}
                 </div>
             </div>
         </nav>

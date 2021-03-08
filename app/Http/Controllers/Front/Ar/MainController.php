@@ -13,10 +13,23 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-    public function home()
+    public function home(Request $request)
     {
         $posts = Post::take(6)->get();
-        $donations = DonationRequest::take(4)->get();
+        $donations = DonationRequest::where(
+            function ($q) use ($request) {
+                if ($request->has('city_id')) {
+                    if ($request->has('blood_type_id')) {
+                        $q->where('blood_type_id', $request->blood_type_id)
+                            ->where('city_id', $request->city_id);
+                    } else {
+                        $q->where('city_id', $request->city_id);
+                    }
+                } elseif ($request->has('blood_type_id')) {
+                    $q->where('blood_type_id', $request->blood_type_id);
+                }
+            }
+        )->latest()->paginate(5);
         $bloods = BloodType::all();
         $cities = City::all();
         return view(
@@ -42,9 +55,22 @@ class MainController extends Controller
         return view('front/ar.about');
     }
 
-    public function donations()
+    public function donations(Request $request)
     {
-        $donations = DonationRequest::all();
+        $donations = DonationRequest::where(
+            function ($q) use ($request) {
+                if ($request->has('city_id')) {
+                    if ($request->has('blood_type_id')) {
+                        $q->where('blood_type_id', $request->blood_type_id)
+                            ->where('city_id', $request->city_id);
+                    } else {
+                        $q->where('city_id', $request->city_id);
+                    }
+                } elseif ($request->has('blood_type_id')) {
+                    $q->where('blood_type_id', $request->blood_type_id);
+                }
+            }
+        )->latest()->paginate(5);
         return view('front/ar.donation-requests', compact('donations'));
     }
 
@@ -55,7 +81,7 @@ class MainController extends Controller
     }
 
     public function toggleFavourite(Request $request)
-    {   
+    {
         $toggle = $request->user()->posts()->toggle($request->post_id);
         return responseJson(1, 'succes', $toggle);
     }

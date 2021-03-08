@@ -20,20 +20,21 @@ Route::group(
     ['namespace' => 'App\Http\Controllers\Front\Ar'],
     function () {
         Route::get('register', 'AuthController@register');
-        Route::post('toggle-favourite', 'MainController@toggleFavourite');
         Route::post('register', 'AuthController@registerCreate');
         Route::get('client/login', 'AuthController@login');
         Route::post('client/login', 'AuthController@loginCheck');
         Route::group(
             ['middleware' => 'auth:clients'],
             function () {
-                Route::get('/', 'MainController@home');
                 Route::get('/contact-us', 'MainController@contact');
                 Route::post('/contact-us', 'MainController@contactUs');
+                Route::get('/', 'MainController@home');
+                Route::post('toggle-favourite', 'MainController@toggleFavourite');
                 Route::get('/about-us', 'MainController@about');
                 Route::get('/donation-requests', 'MainController@donations');
                 Route::get('/donation-requests/{id}', 'MainController@donationDetails');
-                Route::resource('posts', 'PostsController');
+                Route::get('posts', 'PostController@index');
+                Route::get('posts/{id}', 'PostController@show');
             }
         );
     }

@@ -59,8 +59,8 @@
                                 </div>
                                 <a href="" class="favourite">
                                     <i id="{{ $post->id }}" onclick="toggleFavourite(this)" class="fab fa-gratipay
-                                            {{ $post->is_favourite ? 'second-heart' : 'first-heart' }}
-                                            "></i>
+                                                {{ $post->is_favourite ? 'second-heart' : 'first-heart' }}
+                                                "></i>
                                 </a>
 
                                 <div class="card-body">
@@ -86,14 +86,57 @@
         </div>
         <div class="content">
             <div class="container">
-                <form class="row filter">
+                {!! Form::open([
+    'method' => 'get',
+]) !!}
+
+                <div class="row dropdown">
+
+                    <div class="col-md-5">
+
+                        <div class="form-group">
+
+                            {!! Form::select('blood_type_id', $bloods->pluck('name', 'id')->toArray(), request()->input('blood_type_id'), [
+    'class' => 'form-control',
+    'placeholder' => 'اختر فصيلة الدم',
+]) !!}
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-5">
+
+                        <div class="form-group">
+
+                            {!! Form::select('city_id', $cities->pluck('name', 'id')->toArray(), request()->input('city_id'), [
+    'class' => 'form-control',
+    'placeholder' => 'اختر مدينة',
+]) !!}
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-2">
+
+                        <div class="col-md-2 search">
+                            <div class="circle search-icon"><button type="submit"><i
+                                        class="fas fa-search search-icon"></i></button></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                {!! Form::close() !!}
+                {{-- <form class="row filter">
                     <div class="col-md-5 blood">
                         <div class="form-group">
                             <div class="inside-select">
                                 <select class="form-control" id="exampleFormControlSelect1">
                                     <option selected disabled>اختر فصيلة الدم</option>
                                     @foreach ($bloods as $blood)
-                                        <option>{{ $blood->name }}</option>
+                                        <option value="{{ $blood->id }}">{{ $blood->name }}</option>
                                     @endforeach
                                 </select>
                                 <i class="fas fa-chevron-down"></i>
@@ -106,7 +149,7 @@
                                 <select class="form-control" id="exampleFormControlSelect1">
                                     <option selected disabled>اختر المدينة</option>
                                     @foreach ($cities as $city)
-                                        <option>{{ $city->name }}</option>
+                                        <option value="{{ $city->id }}">{{ $city->name }}</option>
                                     @endforeach
                                 </select>
                                 <i class="fas fa-chevron-down"></i>
@@ -118,7 +161,7 @@
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
-                </form>
+                </form> --}}
                 <div class="patients">
                     @foreach ($donations as $donation)
                         <div class="details">
@@ -190,7 +233,7 @@
             </div>
         </div>
     </div>
-        {{-- @push('scripts')
+    {{-- @push('scripts')
             <script>
                 function toggleFavourite(heart) {
                     var post_id = heart.id;

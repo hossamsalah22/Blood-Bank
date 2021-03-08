@@ -7,7 +7,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">الرئيسية</a></li>
-                    <li class="breadcrumb-item" aria-current="page"><a href="{{url(route('posts.index'))}}">المقالات</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="{{url('/posts')}}">المقالات</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{$model->category->name}}</li>
                 </ol>
             </nav>
@@ -44,7 +44,7 @@
                         <div class="card">
                             <div class="photo">
                                 <img src="{{$post->image}}" class="card-img-top" alt="...">
-                                <a href="{{url(route('posts.show', $post->id))}}" class="click">المزيد</a>
+                                <a href="{{url('/posts', $post->id)}}" class="click">المزيد</a>
                             </div>
                             <a href="#" class="favourite">
                                 <i class="far fa-heart"></i>
