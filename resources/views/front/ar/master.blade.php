@@ -51,31 +51,33 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- not a member-->
                 <div class="col-lg-4">
-                    <div class="info" dir="ltr">
-                        <div class="phone">
-                            <i class="fas fa-phone-alt"></i>
-                            <p>{{ $settings->phone }}</p>
-                        </div>
-                        <div class="e-mail">
-                            <i class="far fa-envelope"></i>
-                            <p>{{ $settings->email }}</p>
-                        </div>
-                    </div>
-
-                    <!--I'm a member
-
+                    @guest
+                        @if (Route::has('login'))
+                            <div class="info" dir="ltr">
+                                <div class="phone">
+                                    <i class="fas fa-phone-alt"></i>
+                                    <p>{{ $settings->phone }}</p>
+                                </div>
+                                <div class="e-mail">
+                                    <i class="far fa-envelope"></i>
+                                    <p>{{ $settings->email }}</p>
+                                </div>
+                            </div>
+                        @endif
+                    @else
+                        <!--I'm a member -->
                         <div class="member">
                             <p class="welcome">مرحباً بك</p>
                             <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    احمد محمد
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ auth()->user()->name }}
                                     <i class="fas fa-chevron-down"></i>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="index-1.html">
+                                    <a class="dropdown-item" href="/">
                                         <i class="fas fa-home"></i>
                                         الرئيسية
                                     </a>
@@ -91,24 +93,21 @@
                                         <i class="far fa-heart"></i>
                                         المفضلة
                                     </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="far fa-comments"></i>
-                                        ابلاغ
-                                    </a>
-                                    <a class="dropdown-item" href="contact-us.html">
+                                    <a class="dropdown-item" href="/contact-us">
                                         <i class="fas fa-phone-alt"></i>
                                         تواصل معنا
                                     </a>
-                                    <a class="dropdown-item" href="index.html">
-                                        <i class="fas fa-sign-out-alt"></i>
-                                        تسجيل الخروج
-                                    </a>
+                                    <a href="#" class="dropdown-item"" 
+                  onclick=" event.preventDefault();document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt"></i>تسجيل الخروج</a>
+                                    <form id="logout-form" action="{{ url('client/logout') }}" method="POST"
+                                        style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
                                 </div>
                             </div>
                         </div>
-
-                        -->
-
+                    @endguest
                 </div>
             </div>
         </div>
@@ -154,7 +153,7 @@
                                 <a href="{{ url('/client/login') }}" class="signin">الدخول</a>
                             @endif
                         @else
-                            <a href="#" class="donate">
+                            <a href="/donation-create" class="donate">
                                 <img src="{{ asset('front/imgs/transfusion.svg') }}">
                                 <p>طلب تبرع</p>
                             </a>

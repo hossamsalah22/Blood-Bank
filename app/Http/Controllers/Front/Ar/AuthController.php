@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Front\LoginRequest;
 use App\Http\Requests\Front\RegisterRequest;
 use App\Models\Client;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Str;
 
 class AuthController extends Controller
@@ -38,31 +38,24 @@ class AuthController extends Controller
         $client = Client::where('phone', $request->input('phone'))->first();
         if ($client) {
             if (Auth::guard('clients')->attempt($request->only('phone', 'password'))) {
-                flash()->success('مرحبا '.\auth()->guard('clients')->user()->name);
+                flash()->success('مرحبا ' . \auth()->guard('clients')->user()->name);
                 return redirect('/');
             } else {
                 flash()->error('يوجد خطأ فى بيانات الدخول');
                 return back();
-        return view('site.login');
+                return view('site.login');
             }
         }
 
         flash()->error('لا يوجد حساب مرتبط بهذا الرقم');
 
         return back();
-        // $client = Client::where('phone', $request->phone)->first();
-        // if ($client) {
-        //     if (Hash::check($request->password, $client->password)) {
-        //         flash()->success('مرحبا ');
-        //         return redirect(url('/'));
-        //     } else {
-        //         flash()->error('يوجد خطأ فى بيانات الدخول');
-        //         return back();
-        //     }
-        // }
+    }
 
-        // flash()->error('لا يوجد حساب مرتبط بهذا الرقم');
-
-        // return back();
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        flash('Success')->success();
+        return redirect(url('/client/login'));
     }
 }

@@ -33,8 +33,11 @@ Route::group(
                 Route::get('/about-us', 'MainController@about');
                 Route::get('/donation-requests', 'MainController@donations');
                 Route::get('/donation-requests/{id}', 'MainController@donationDetails');
+                Route::get('/donation-create', 'MainController@donationCreate');
+                Route::post('/donation-create', 'MainController@donationCreateSave');
                 Route::get('posts', 'PostController@index');
                 Route::get('posts/{id}', 'PostController@show');
+                Route::post('client/logout', 'AuthController@logout');
             }
         );
     }

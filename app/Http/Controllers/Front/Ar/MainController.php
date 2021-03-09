@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front\Ar;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Front\ContactRequest;
+use App\Http\Requests\Front\CreateDonationRequest;
 use App\Models\BloodType;
 use App\Models\City;
 use App\Models\Contact;
@@ -84,5 +85,17 @@ class MainController extends Controller
     {
         $toggle = $request->user()->posts()->toggle($request->post_id);
         return responseJson(1, 'succes', $toggle);
+    }
+
+    public function donationCreate()
+    {
+        return view('front/ar.create-donation-requests');
+    }
+
+    public function donationCreateSave(CreateDonationRequest $request)
+    {
+        $model = DonationRequest::create($request->all());
+        flash('Donation Added Successfully')->success();
+        return redirect(url('/donation-requests'));
     }
 }
